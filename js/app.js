@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize the application
     initApp();
 });
@@ -15,16 +15,14 @@ function initApp() {
 }
 
 function initModals() {
-    // Close modals when clicking the close button
     document.querySelectorAll('.close-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             this.closest('.modal').style.display = 'none';
         });
     });
 
-    // Close modals when clicking outside
     document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(e) {
+        modal.addEventListener('click', function (e) {
             if (e.target === this) {
                 this.style.display = 'none';
             }
@@ -33,19 +31,17 @@ function initModals() {
 }
 
 function initForms() {
-    // Fine form submission
     const fineForm = document.getElementById('fineForm');
     if (fineForm) {
-        fineForm.addEventListener('submit', function(e) {
+        fineForm.addEventListener('submit', function (e) {
             e.preventDefault();
             submitFineForm(this);
         });
     }
 
-    // Payment form submission
     const paymentForm = document.getElementById('paymentForm');
     if (paymentForm) {
-        paymentForm.addEventListener('submit', function(e) {
+        paymentForm.addEventListener('submit', function (e) {
             e.preventDefault();
             submitPaymentForm(this);
         });
@@ -53,7 +49,6 @@ function initForms() {
 }
 
 function loadData() {
-    // Simulate loading data from API
     setTimeout(() => {
         populateStudentDropdowns();
         populateViolationDropdown();
@@ -62,44 +57,38 @@ function loadData() {
 }
 
 function setupEventListeners() {
-    // View all transactions button
     const viewAllBtn = document.querySelector('.btn.view-all');
     if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', function() {
+        viewAllBtn.addEventListener('click', function () {
             alert('View all transactions functionality would go here');
         });
     }
 
-    // Period selector change
     const periodSelector = document.querySelector('.period-selector');
     if (periodSelector) {
-        periodSelector.addEventListener('change', function() {
+        periodSelector.addEventListener('change', function () {
             updateChartData(this.value);
         });
     }
 }
 
 function setupPageNavigation() {
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('active'));
+
     document.querySelectorAll('.main-nav a').forEach(link => {
-        link.addEventListener('click', function (e) {
-            // Optional: prevent full reload if using SPA behavior
-            // e.preventDefault();
+        const href = link.getAttribute('href');
+        if (currentPath.includes(href)) {
+            link.parentElement.classList.add('active');
+        }
 
-            // Remove active from all and add to clicked
-            document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('active'));
-            this.parentElement.classList.add('active');
-
-            // Redirect to linked page
-            const href = this.getAttribute('href');
-            if (href) {
-                window.location.href = href;
-            }
+        link.addEventListener('click', function () {
+            window.location.href = href;
         });
     });
 }
 
 function populateStudentDropdowns() {
-    // Simulated student data
     const students = [
         { id: 1, name: 'Juan Dela Cruz' },
         { id: 2, name: 'Maria Santos' },
@@ -108,7 +97,6 @@ function populateStudentDropdowns() {
         { id: 5, name: 'Luis Garcia' }
     ];
 
-    // Populate both student dropdowns
     const studentSelects = [
         document.getElementById('student'),
         document.getElementById('paymentStudent')
@@ -127,7 +115,6 @@ function populateStudentDropdowns() {
 }
 
 function populateViolationDropdown() {
-    // Simulated violation data
     const violations = [
         { id: 1, name: 'Late Homework', fee: 50 },
         { id: 2, name: 'Uniform Violation', fee: 100 },
@@ -147,7 +134,6 @@ function populateViolationDropdown() {
 }
 
 function populatePaymentCategories() {
-    // Simulated category data
     const categories = [
         { id: 1, name: 'Fine Payment' },
         { id: 2, name: 'Class Funds' },
@@ -168,33 +154,27 @@ function populatePaymentCategories() {
 }
 
 function submitFineForm(form) {
-    // In a real app, this would send data to the server
     const formData = new FormData(form);
     const fineData = Object.fromEntries(formData.entries());
 
     console.log('Submitting fine:', fineData);
     alert('Fine submitted successfully! (In a real app, this would be saved to the database)');
 
-    // Reset form and close modal
     form.reset();
     document.getElementById('fineModal').style.display = 'none';
 }
 
 function submitPaymentForm(form) {
-    // In a real app, this would send data to the server
     const formData = new FormData(form);
     const paymentData = Object.fromEntries(formData.entries());
 
     console.log('Submitting payment:', paymentData);
     alert('Payment submitted successfully! (In a real app, this would be saved to the database)');
 
-    // Reset form and close modal
     form.reset();
     document.getElementById('paymentModal').style.display = 'none';
 }
 
 function updateChartData(period) {
-    // In a real app, this would fetch new data from the server
     console.log('Updating charts for period:', period);
-    // This would trigger a redraw of the charts with new data
 }
