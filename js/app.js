@@ -8,9 +8,10 @@ function initApp() {
     initModals();
     initForms();
     loadData();
-    
+
     // Set up event listeners
     setupEventListeners();
+    setupPageNavigation();
 }
 
 function initModals() {
@@ -20,7 +21,7 @@ function initModals() {
             this.closest('.modal').style.display = 'none';
         });
     });
-    
+
     // Close modals when clicking outside
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', function(e) {
@@ -40,7 +41,7 @@ function initForms() {
             submitFineForm(this);
         });
     }
-    
+
     // Payment form submission
     const paymentForm = document.getElementById('paymentForm');
     if (paymentForm) {
@@ -68,7 +69,7 @@ function setupEventListeners() {
             alert('View all transactions functionality would go here');
         });
     }
-    
+
     // Period selector change
     const periodSelector = document.querySelector('.period-selector');
     if (periodSelector) {
@@ -76,6 +77,25 @@ function setupEventListeners() {
             updateChartData(this.value);
         });
     }
+}
+
+function setupPageNavigation() {
+    document.querySelectorAll('.main-nav a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Optional: prevent full reload if using SPA behavior
+            // e.preventDefault();
+
+            // Remove active from all and add to clicked
+            document.querySelectorAll('.main-nav li').forEach(li => li.classList.remove('active'));
+            this.parentElement.classList.add('active');
+
+            // Redirect to linked page
+            const href = this.getAttribute('href');
+            if (href) {
+                window.location.href = href;
+            }
+        });
+    });
 }
 
 function populateStudentDropdowns() {
@@ -87,13 +107,13 @@ function populateStudentDropdowns() {
         { id: 4, name: 'Ana Lopez' },
         { id: 5, name: 'Luis Garcia' }
     ];
-    
+
     // Populate both student dropdowns
     const studentSelects = [
         document.getElementById('student'),
         document.getElementById('paymentStudent')
     ];
-    
+
     studentSelects.forEach(select => {
         if (select) {
             students.forEach(student => {
@@ -114,7 +134,7 @@ function populateViolationDropdown() {
         { id: 3, name: 'Classroom Misconduct', fee: 150 },
         { id: 4, name: 'Late Project Submission', fee: 200 }
     ];
-    
+
     const violationSelect = document.getElementById('violation');
     if (violationSelect) {
         violations.forEach(violation => {
@@ -135,7 +155,7 @@ function populatePaymentCategories() {
         { id: 4, name: 'Event Fee' },
         { id: 5, name: 'Other' }
     ];
-    
+
     const categorySelect = document.getElementById('paymentCategory');
     if (categorySelect) {
         categories.forEach(category => {
@@ -151,10 +171,10 @@ function submitFineForm(form) {
     // In a real app, this would send data to the server
     const formData = new FormData(form);
     const fineData = Object.fromEntries(formData.entries());
-    
+
     console.log('Submitting fine:', fineData);
     alert('Fine submitted successfully! (In a real app, this would be saved to the database)');
-    
+
     // Reset form and close modal
     form.reset();
     document.getElementById('fineModal').style.display = 'none';
@@ -164,10 +184,10 @@ function submitPaymentForm(form) {
     // In a real app, this would send data to the server
     const formData = new FormData(form);
     const paymentData = Object.fromEntries(formData.entries());
-    
+
     console.log('Submitting payment:', paymentData);
     alert('Payment submitted successfully! (In a real app, this would be saved to the database)');
-    
+
     // Reset form and close modal
     form.reset();
     document.getElementById('paymentModal').style.display = 'none';
