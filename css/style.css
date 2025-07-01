@@ -458,4 +458,34 @@ th {
     }
 }
 
+/* COLLAPSIBLE SIDEBAR *//* COLLAPSIBLE SIDEBAR */
+
+/* Base collapsed style */
+.sidebar.hover-expand.collapsed {
+    width: 60px;
+      transition: var(--transition);
+    overflow: hidden;
+}
+
+/* Expand on hover */
+.sidebar.hover-expand.collapsed:hover {
+    width: 250px;
+}
+
+/* Hide text only when collapsed */
+.sidebar.collapsed .logo span,
+.sidebar.collapsed .main-nav a span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.sidebar.collapsed:hover .logo span,
+.sidebar.collapsed:hover .main-nav a span {
+    opacity: 1;
+}
+
+
+
+
 

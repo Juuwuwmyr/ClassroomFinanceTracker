@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     initApp();
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Add 'collapsed' class after a short delay to avoid jump-cut on navigation
+    const sidebar = document.getElementById('sidebar');
+    setTimeout(() => {
+        sidebar.classList.add('collapsed');
+    }, 300); // Adjust delay if needed
+});
+
+
 function initApp() {
     // Initialize all components
     initModals();
