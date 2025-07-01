@@ -125,21 +125,6 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('openFineModalBtn').addEventListener('click', () => {
-            document.getElementById('fineModal').style.display = 'block';
-        });
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        // Optional: auto-close modal on outside click
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-            }
-        });
-    </script>
+   <script src="../js/app.js"></script>
 </body>
 </html>
