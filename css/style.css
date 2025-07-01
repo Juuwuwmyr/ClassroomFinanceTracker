@@ -22,7 +22,9 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
+    overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f7fa;
     color: var(--dark);
@@ -31,7 +33,8 @@ body {
 
 .app-container {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* Sidebar Styles */
@@ -42,6 +45,8 @@ body {
     padding: 1.5rem 0;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .logo {
@@ -95,8 +100,10 @@ body {
 /* Main Content Styles */
 .main-content {
     flex: 1;
-    padding: 1.5rem;
+    height: 100vh;
     overflow-y: auto;
+    padding: 1.5rem;
+    background-color: #f5f7fa;
 }
 
 .top-bar {
@@ -418,15 +425,15 @@ th {
     .app-container {
         flex-direction: column;
     }
-    
+
     .sidebar {
         width: 100%;
     }
-    
+
     .main-content {
         padding: 1rem;
     }
-    
+
     .summary-cards,
     .chart-section {
         grid-template-columns: 1fr;
@@ -439,12 +446,12 @@ th {
         align-items: flex-start;
         gap: 1rem;
     }
-    
+
     .user-profile {
         width: 100%;
         justify-content: flex-end;
     }
-    
+
     .modal-content {
         margin: 1rem auto;
         width: 95%;

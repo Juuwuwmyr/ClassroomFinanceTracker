@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | ClassFinance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>ClassFinance</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i> Fines</a></li>
+                <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i> Payments</a></li>
+                <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                <li class="active"><a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1 class="page-title">Reports</h1>
+            <div class="user-profile">
+                <span class="username">Finance Officer</span>
+                <div class="avatar">FO</div>
+            </div>
+        </header>
+
+        <section class="transactions-section">
+            <div class="section-header">
+                <h2>Generate Reports</h2>
+                <button class="btn primary" onclick="alert('Filter modal or report builder coming soon')">Filter</button>
+            </div>
+            <div class="transactions-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Report</th>
+                            <th>Generated On</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Income Summary</td>
+                            <td>2023-11-30</td>
+                            <td>Income</td>
+                            <td>Completed</td>
+                            <td><button class="btn view-all">Download</button></td>
+                        </tr>
+                        <tr>
+                            <td>Outstanding Fines</td>
+                            <td>2023-11-25</td>
+                            <td>Fines</td>
+                            <td>Completed</td>
+                            <td><button class="btn view-all">Download</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
