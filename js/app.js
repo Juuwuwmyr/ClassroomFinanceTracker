@@ -178,3 +178,5 @@ function submitPaymentForm(form) {
 function updateChartData(period) {
     console.log('Updating charts for period:', period);
 }
+
+
