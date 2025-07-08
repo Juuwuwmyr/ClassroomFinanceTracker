@@ -6,25 +6,100 @@
     <title>Payments | ClassFinance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Additional styles to match dashboard */
+        .transactions-table table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        
+        .transactions-table th, 
+        .transactions-table td {
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        /* Column width adjustments */
+        .transactions-table th:nth-child(1),
+        .transactions-table td:nth-child(1) {
+            width: 15%;
+        }
+        
+        .transactions-table th:nth-child(2),
+        .transactions-table td:nth-child(2) {
+            width: 25%;
+        }
+        
+        .transactions-table th:nth-child(3),
+        .transactions-table td:nth-child(3) {
+            width: 25%;
+        }
+        
+        .transactions-table th:nth-child(4),
+        .transactions-table td:nth-child(4) {
+            width: 15%;
+        }
+        
+        .transactions-table th:nth-child(5),
+        .transactions-table td:nth-child(5) {
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
 <div class="app-container">
-    <aside class="sidebar hover-expand" id="sidebar">
+    <aside class="sidebar">
         <div class="logo">
             <i class="fas fa-money-bill-wave"></i>
             <span>ClassFinance</span>
         </div>
-       <nav class="main-nav">
-                <ul>
-                    <li class="active"><a href="../index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
-                </ul>
-            </nav>
+        <nav class="main-nav">
+            <ul>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="students.html" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="fines.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Fines</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="payments.html" class="nav-link">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <span>Payments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="transactions.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="reports.html" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </aside>
 
     <main class="main-content">
@@ -39,7 +114,9 @@
         <section class="transactions-section">
             <div class="section-header">
                 <h2>Payment Records</h2>
-                <button class="btn primary" onclick="alert('Open Record Payment modal')">Record Payment</button>
+                <button class="btn primary" id="recordPaymentBtn">
+                    <i class="fas fa-plus"></i> Record Payment
+                </button>
             </div>
             <div class="transactions-table">
                 <table>
@@ -58,14 +135,22 @@
                             <td>Juan Dela Cruz</td>
                             <td>Class Funds</td>
                             <td>₱500.00</td>
-                            <td>Cash</td>
+                            <td>
+                                <span class="payment-method cash">
+                                    <i class="fas fa-money-bill-wave"></i> Cash
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td>2023-11-12</td>
                             <td>Maria Santos</td>
                             <td>Fine Payment</td>
                             <td>₱150.00</td>
-                            <td>GCash</td>
+                            <td>
+                                <span class="payment-method gcash">
+                                    <i class="fas fa-mobile-alt"></i> GCash
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,6 +158,28 @@
         </section>
     </main>
 </div>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+</div>
+
+<!-- Sidebar Toggle (Mobile) -->
+<div class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Payment Modal (would be triggered by the Record Payment button) -->
+<div class="modal" id="paymentModal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Record New Payment</h2>
+        <form class="modal-form">
+            <!-- Form content would go here -->
+        </form>
+    </div>
+</div>
+
 <script src="../js/app.js"></script>
 </body>
 </html>

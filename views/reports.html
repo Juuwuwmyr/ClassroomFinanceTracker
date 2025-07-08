@@ -6,25 +6,110 @@
     <title>Reports | ClassFinance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Additional styles to match dashboard */
+        .transactions-table table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        
+        .transactions-table th, 
+        .transactions-table td {
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        /* Column width adjustments */
+        .transactions-table th:nth-child(1),
+        .transactions-table td:nth-child(1) {
+            width: 35%;
+        }
+        
+        .transactions-table th:nth-child(2),
+        .transactions-table td:nth-child(2) {
+            width: 20%;
+        }
+        
+        .transactions-table th:nth-child(3),
+        .transactions-table td:nth-child(3) {
+            width: 15%;
+        }
+        
+        .transactions-table th:nth-child(4),
+        .transactions-table td:nth-child(4) {
+            width: 15%;
+        }
+        
+        .transactions-table th:nth-child(5),
+        .transactions-table td:nth-child(5) {
+            width: 15%;
+            text-align: center;
+        }
+        
+        .status-badge.completed {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .btn.view-all {
+            padding: 8px 16px;
+        }
+    </style>
 </head>
 <body>
 <div class="app-container">
-    <aside class="sidebar hover-expand" id="sidebar">
+    <aside class="sidebar">
         <div class="logo">
             <i class="fas fa-money-bill-wave"></i>
             <span>ClassFinance</span>
         </div>
-       <nav class="main-nav">
-                <ul>
-                    <li class="active"><a href="../index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
-                </ul>
-            </nav>
+        <nav class="main-nav">
+            <ul>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="students.html" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="fines.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Fines</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="payments.html" class="nav-link">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <span>Payments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="transactions.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="reports.html" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </aside>
 
     <main class="main-content">
@@ -39,7 +124,14 @@
         <section class="transactions-section">
             <div class="section-header">
                 <h2>Generate Reports</h2>
-                <button class="btn primary" onclick="alert('Filter modal or report builder coming soon')">Filter</button>
+                <div class="actions">
+                    <button class="btn primary" id="filterReportsBtn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    <button class="btn primary" id="generateReportBtn">
+                        <i class="fas fa-plus"></i> New Report
+                    </button>
+                </div>
             </div>
             <div class="transactions-table">
                 <table>
@@ -57,15 +149,29 @@
                             <td>Monthly Income Summary</td>
                             <td>2023-11-30</td>
                             <td>Income</td>
-                            <td>Completed</td>
-                            <td><button class="btn view-all">Download</button></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td>
+                                <button class="btn-icon" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="Print">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Outstanding Fines</td>
                             <td>2023-11-25</td>
                             <td>Fines</td>
-                            <td>Completed</td>
-                            <td><button class="btn view-all">Download</button></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td>
+                                <button class="btn-icon" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="Print">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,6 +179,28 @@
         </section>
     </main>
 </div>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+</div>
+
+<!-- Sidebar Toggle (Mobile) -->
+<div class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Report Filter Modal (would be triggered by the Filter button) -->
+<div class="modal" id="filterModal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Filter Reports</h2>
+        <form class="modal-form">
+            <!-- Filter form content would go here -->
+        </form>
+    </div>
+</div>
+
 <script src="../js/app.js"></script>
 </body>
 </html>

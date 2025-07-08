@@ -9,23 +9,57 @@
 </head>
 <body>
 <div class="app-container">
-    <aside class="sidebar hover-expand" id="sidebar">
+    <aside class="sidebar">
         <div class="logo">
             <i class="fas fa-money-bill-wave"></i>
             <span>ClassFinance</span>
         </div>
         <nav class="main-nav">
-                <ul>
-                    <li class="active"><a href="../index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
-                </ul>
-            </nav>
-      
+            <ul>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="students.html" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="fines.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Fines</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="payments.html" class="nav-link">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <span>Payments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="transactions.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="reports.html" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </aside>
 
     <main class="main-content">
@@ -59,14 +93,28 @@
                             <td>Juan Dela Cruz</td>
                             <td>10</td>
                             <td>Rizal</td>
-                            <td><button class="btn view-all">Edit</button></td>
+                            <td>
+                                <button class="btn-icon" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon danger" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>STU002</td>
                             <td>Maria Santos</td>
                             <td>9</td>
                             <td>Luna</td>
-                            <td><button class="btn view-all">Edit</button></td>
+                            <td>
+                                <button class="btn-icon" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon danger" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,6 +122,17 @@
         </section>
     </main>
 </div>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+</div>
+
+<!-- Sidebar Toggle (Mobile) -->
+<div class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+</div>
+
 <script src="../js/app.js"></script>
 </body>
 </html>

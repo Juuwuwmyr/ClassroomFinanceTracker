@@ -6,24 +6,117 @@
     <title>Fines - ClassFinance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="../css/style.css" />
+    <style>
+        /* Additional styles to match dashboard */
+        .transactions-table table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        
+        .transactions-table th, 
+        .transactions-table td {
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        /* Column width adjustments */
+        .transactions-table th:nth-child(1),
+        .transactions-table td:nth-child(1) {
+            width: 12%;
+        }
+        
+        .transactions-table th:nth-child(2),
+        .transactions-table td:nth-child(2) {
+            width: 18%;
+        }
+        
+        .transactions-table th:nth-child(3),
+        .transactions-table td:nth-child(3) {
+            width: 20%;
+        }
+        
+        .transactions-table th:nth-child(4),
+        .transactions-table td:nth-child(4),
+        .transactions-table th:nth-child(5),
+        .transactions-table td:nth-child(5) {
+            width: 12%;
+        }
+        
+        .transactions-table th:nth-child(6),
+        .transactions-table td:nth-child(6) {
+            width: 10%;
+        }
+        
+        .transactions-table th:nth-child(7),
+        .transactions-table td:nth-child(7) {
+            width: 16%;
+            text-align: center;
+        }
+        
+        /* Button styling */
+        .btn.view-all {
+            padding: 8px 16px;
+            margin-right: 8px;
+        }
+        
+        .btn.primary {
+            padding: 8px 16px;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
         <!-- Sidebar -->
-        <aside class="sidebar hover-expand" id="sidebar">
+        <aside class="sidebar">
             <div class="logo">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>ClassFinance</span>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li class="active"><a href="../index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="students.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="fines.html" class="nav-link">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Fines</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="payments.html" class="nav-link">
+                            <i class="fas fa-money-bill-alt"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="transactions.html" class="nav-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -38,7 +131,7 @@
                 </div>
             </header>
 
-            <section class="fines-content">
+            <section class="transactions-section">
                 <div class="section-header">
                     <h2>Manage Fines</h2>
                     <button class="btn primary" id="openFineModalBtn"><i class="fas fa-plus"></i> Issue Fine</button>
@@ -66,8 +159,12 @@
                                 <td>2023-11-20</td>
                                 <td><span class="status-badge pending">Pending</span></td>
                                 <td>
-                                    <button class="btn view-all">View</button>
-                                    <button class="btn primary">Mark as Paid</button>
+                                    <button class="btn-icon" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon primary" title="Mark as Paid">
+                                        <i class="fas fa-check"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +175,9 @@
                                 <td>2023-11-05</td>
                                 <td><span class="status-badge paid">Paid</span></td>
                                 <td>
-                                    <button class="btn view-all">View</button>
+                                    <button class="btn-icon" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -86,6 +185,16 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Sidebar Toggle (Mobile) -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
     </div>
 
     <!-- Fine Modal -->
@@ -119,6 +228,7 @@
                     <textarea id="notes" rows="3"></textarea>
                 </div>
                 <div class="form-actions">
+                    <button type="button" class="btn cancel" onclick="closeModal('fineModal')">Cancel</button>
                     <button type="submit" class="btn primary">Issue Fine</button>
                 </div>
             </form>

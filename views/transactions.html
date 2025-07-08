@@ -3,76 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transactions | ClassFinance</title>
+    <title>Transactions | Classroom Finance Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div class="app-container">
-    <aside class="sidebar hover-expand" id="sidebar">
-        <div class="logo">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>ClassFinance</span>
-        </div>
-        <nav class="main-nav">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>ClassFinance</span>
+            </div>
+            <nav class="main-nav">
                 <ul>
-                    <li class="active"><a href="../index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="students.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fines.html" class="nav-link">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Fines</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="payments.html" class="nav-link">
+                            <i class="fas fa-money-bill-alt"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="transactions.html" class="nav-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
-    </aside>
+        </aside>
 
-    <main class="main-content">
-        <header class="top-bar">
-            <h1 class="page-title">Transactions</h1>
-            <div class="user-profile">
-                <span class="username">Finance Officer</span>
-                <div class="avatar">FO</div>
-            </div>
-        </header>
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 class="page-title">Transactions</h1>
+                <div class="user-profile">
+                    <span class="username">Finance Officer</span>
+                    <div class="avatar">FO</div>
+                </div>
+            </header>
 
-        <section class="transactions-section">
-            <div class="section-header">
-                <h2>All Transactions</h2>
-                <button class="btn view-all" onclick="alert('Export feature coming soon')">Export</button>
-            </div>
-            <div class="transactions-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Student</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2023-11-15</td>
-                            <td>Juan Dela Cruz</td>
-                            <td>Fine Payment</td>
-                            <td>₱200.00</td>
-                            <td><span class="status-badge paid">Paid</span></td>
-                        </tr>
-                        <tr>
-                            <td>2023-11-12</td>
-                            <td>Pedro Reyes</td>
-                            <td>Uniform Violation</td>
-                            <td>₱150.00</td>
-                            <td><span class="status-badge pending">Pending</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-</div>
-<script src="../js/app.js"></script>
+            <!-- Transactions Content -->
+            <section class="transactions-section">
+                <div class="section-header">
+                    <h2>All Transactions</h2>
+                    <button class="btn view-all" onclick="alert('Export feature coming soon')">Export</button>
+                </div>
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Student</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-11-15</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>Fine Payment</td>
+                                <td>₱200.00</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>2023-11-12</td>
+                                <td>Pedro Reyes</td>
+                                <td>Uniform Violation</td>
+                                <td>₱150.00</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Sidebar Toggle (Mobile) -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <script src="../js/app.js"></script>
 </body>
 </html>
