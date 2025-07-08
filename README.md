@@ -15,10 +15,10 @@ A **classroom finance management system** that helps track **fines, payments, tr
 ## Explanation
 
 This system allows classroom officers to:
-✅ Issue and track **student fines** with due dates and statuses.  
-✅ Record **payments** for fines, class funds, and other contributions.  
-✅ View **transaction records** for transparency.  
-✅ Generate **reports** for financial monitoring.
+► Issue and track **student fines** with due dates and statuses.  
+► Record **payments** for fines, class funds, and other contributions.  
+► View **transaction records** for transparency.  
+► Generate **reports** for financial monitoring.
 
 It uses **WampServer (Windows Apache MySQL PHP)** to run locally, with your database and project files organized inside your `wamp64/www` directory for ease of testing and development.
 
