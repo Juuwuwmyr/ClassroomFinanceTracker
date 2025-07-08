@@ -17,8 +17,7 @@ function initApp() {
     initModals();
     initForms();
     loadData();
-
-    // Set up event listeners
+    loadFines();
     setupEventListeners();
     setupPageNavigation();
 }
@@ -59,11 +58,12 @@ function initForms() {
 
 function loadData() {
     setTimeout(() => {
-        populateStudentDropdowns();
-        populateViolationDropdown();
+        populateViolations() ;
+        populateStudents();
         populatePaymentCategories();
     }, 500);
 }
+
 
 function setupEventListeners() {
     const viewAllBtn = document.querySelector('.btn.view-all');
@@ -97,50 +97,7 @@ function setupPageNavigation() {
     });
 }
 
-function populateStudentDropdowns() {
-    const students = [
-        { id: 1, name: 'Juan Dela Cruz' },
-        { id: 2, name: 'Maria Santos' },
-        { id: 3, name: 'Pedro Reyes' },
-        { id: 4, name: 'Ana Lopez' },
-        { id: 5, name: 'Luis Garcia' }
-    ];
 
-    const studentSelects = [
-        document.getElementById('student'),
-        document.getElementById('paymentStudent')
-    ];
-
-    studentSelects.forEach(select => {
-        if (select) {
-            students.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student.id;
-                option.textContent = student.name;
-                select.appendChild(option);
-            });
-        }
-    });
-}
-
-function populateViolationDropdown() {
-    const violations = [
-        { id: 1, name: 'Late Homework', fee: 50 },
-        { id: 2, name: 'Uniform Violation', fee: 100 },
-        { id: 3, name: 'Classroom Misconduct', fee: 150 },
-        { id: 4, name: 'Late Project Submission', fee: 200 }
-    ];
-
-    const violationSelect = document.getElementById('violation');
-    if (violationSelect) {
-        violations.forEach(violation => {
-            const option = document.createElement('option');
-            option.value = violation.id;
-            option.textContent = `${violation.name} (₱${violation.fee})`;
-            violationSelect.appendChild(option);
-        });
-    }
-}
 
 function populatePaymentCategories() {
     const categories = [
@@ -161,16 +118,30 @@ function populatePaymentCategories() {
         });
     }
 }
-
-function submitFineForm(form) {
+async function submitFineForm(form) {
     const formData = new FormData(form);
-    const fineData = Object.fromEntries(formData.entries());
 
-    console.log('Submitting fine:', fineData);
-    alert('Fine submitted successfully! (In a real app, this would be saved to the database)');
+    try {
+        const res = await fetch('../php/add_fine.php', {
+            method: 'POST',
+            body: formData
+        });
 
-    form.reset();
-    document.getElementById('fineModal').style.display = 'none';
+        const result = await res.json();
+
+        if (result.success) {
+            alert('Fine submitted successfully!');
+            form.reset();
+            document.getElementById('fineModal').style.display = 'none';
+            // reload fines after adding
+            loadFines();
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Error submitting fine: ' + err.message);
+    }
 }
 
 function submitPaymentForm(form) {
@@ -314,3 +285,127 @@ function initCharts() {
 
 document.addEventListener('DOMContentLoaded', initCharts);
 
+
+function populateStudents() {
+    fetch('../php/get_students.php')
+        .then(res => res.json())
+        .then(data => {
+            const studentSelect = document.getElementById('student');
+            data.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.student_id;
+                option.textContent = student.name;
+                studentSelect.appendChild(option);
+            });
+        });
+}
+
+function populateViolations() {
+    fetch('../php/get_violations.php')
+        .then(res => res.json())
+        .then(data => {
+            const violationSelect = document.getElementById('violation');
+            data.forEach(violation => {
+                const option = document.createElement('option');
+                option.value = violation.violation_id;
+                option.textContent = violation.vname;
+                violationSelect.appendChild(option);
+            });
+        });
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
+document.getElementById('openFineModalBtn').addEventListener('click', () => {
+    document.getElementById('fineModal').style.display = 'block';
+});// Populate Select Options
+async function populateSelects() {
+    const studentSelect = document.getElementById('student');
+    const violationSelect = document.getElementById('violation');
+
+    // Load students
+    try {
+        const studentsRes = await fetch('../php/get_students.php');
+        const students = await studentsRes.json();
+
+        if (students.error) throw new Error(students.error);
+
+        studentSelect.innerHTML = '<option value="">Select Student</option>';
+        students.forEach(student => {
+            const opt = document.createElement('option');
+            opt.value = student.student_id; // ✅ use ID as value
+            opt.textContent = student.name;
+            studentSelect.appendChild(opt);
+        });
+    } catch (err) {
+        console.error(err);
+        studentSelect.innerHTML = '<option value="">Unable to load students</option>';
+        alert("Error loading students: " + err.message);
+    }
+
+    // Load violations
+    try {
+        const violationsRes = await fetch('../php/get_violations.php');
+        const violations = await violationsRes.json();
+
+        if (violations.error) throw new Error(violations.error);
+
+        violationSelect.innerHTML = '<option value="">Select Violation</option>';
+        violations.forEach(violation => {
+            const opt = document.createElement('option');
+            opt.value = violation.violation_id; // ✅ use ID as value
+            opt.textContent = violation.vname;
+            violationSelect.appendChild(opt);
+        });
+    } catch (err) {
+        console.error(err);
+        violationSelect.innerHTML = '<option value="">Unable to load violations</option>';
+        alert("Error loading violations: " + err.message);
+    }
+}
+
+const fineModal = document.getElementById('fineModal');
+document.getElementById('openFineModalBtn').addEventListener('click', () => fineModal.style.display = 'flex');
+document.getElementById('closeFineModalBtn').addEventListener('click', () => fineModal.style.display = 'none');
+document.getElementById('cancelFineBtn').addEventListener('click', () => fineModal.style.display = 'none');
+
+
+// Load Fines Table
+async function loadFines() {
+    const tbody = document.getElementById('finesTableBody');
+    tbody.innerHTML = '<tr><td colspan="7">Loading fines...</td></tr>';
+    try {
+        const res = await fetch('../php/get_fines.php');
+        const fines = await res.json();
+
+        if (fines.error) throw new Error(fines.error);
+
+        tbody.innerHTML = '';
+        if (fines.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7">No fines found.</td></tr>';
+        } else {
+            fines.forEach(fine => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${fine.date_issued}</td>
+                    <td>${fine.student_name}</td>
+                    <td>${fine.name}</td>
+                    <td>₱${parseFloat(fine.amount).toFixed(2)}</td>
+                    <td>${fine.due_date}</td>
+                    <td><span class="status-badge ${fine.status.toLowerCase()}">${fine.status}</span></td>
+                    <td>
+                        <button class="btn-icon" title="View"><i class="fas fa-eye"></i></button>
+                        ${fine.status === 'Pending' ? `<button class="btn-icon primary" title="Mark as Paid"><i class="fas fa-check"></i></button>` : ''}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        tbody.innerHTML = '<tr><td colspan="7">Error loading fines.</td></tr>';
+        alert("Error loading fines: " + err.message);
+    }
+}

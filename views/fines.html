@@ -1,3 +1,4 @@
+<!-- Fines - ClassFinance (Aligned with Dashboard Design) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,67 +7,10 @@
     <title>Fines - ClassFinance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="../css/style.css" />
-    <style>
-        /* Additional styles to match dashboard */
-        .transactions-table table {
-            table-layout: fixed;
-            width: 100%;
-        }
-        
-        .transactions-table th, 
-        .transactions-table td {
-            padding: 12px 16px;
-            text-align: left;
-            vertical-align: middle;
-        }
-        
-        /* Column width adjustments */
-        .transactions-table th:nth-child(1),
-        .transactions-table td:nth-child(1) {
-            width: 12%;
-        }
-        
-        .transactions-table th:nth-child(2),
-        .transactions-table td:nth-child(2) {
-            width: 18%;
-        }
-        
-        .transactions-table th:nth-child(3),
-        .transactions-table td:nth-child(3) {
-            width: 20%;
-        }
-        
-        .transactions-table th:nth-child(4),
-        .transactions-table td:nth-child(4),
-        .transactions-table th:nth-child(5),
-        .transactions-table td:nth-child(5) {
-            width: 12%;
-        }
-        
-        .transactions-table th:nth-child(6),
-        .transactions-table td:nth-child(6) {
-            width: 10%;
-        }
-        
-        .transactions-table th:nth-child(7),
-        .transactions-table td:nth-child(7) {
-            width: 16%;
-            text-align: center;
-        }
-        
-        /* Button styling */
-        .btn.view-all {
-            padding: 8px 16px;
-            margin-right: 8px;
-        }
-        
-        .btn.primary {
-            padding: 8px 16px;
-        }
-    </style>
 </head>
 <body>
     <div class="app-container">
+
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
@@ -75,48 +19,13 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li class="nav-item">
-                        <a href="../index.html" class="nav-link">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="students.html" class="nav-link">
-                            <i class="fas fa-users"></i>
-                            <span>Students</span>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a href="fines.html" class="nav-link">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>Fines</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="payments.html" class="nav-link">
-                            <i class="fas fa-money-bill-alt"></i>
-                            <span>Payments</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="transactions.html" class="nav-link">
-                            <i class="fas fa-exchange-alt"></i>
-                            <span>Transactions</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="reports.html" class="nav-link">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Reports</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="settings.html" class="nav-link">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
+                    <li class="nav-item"><a href="../index.html" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a href="students.html" class="nav-link"><i class="fas fa-users"></i><span>Students</span></a></li>
+                    <li class="nav-item active"><a href="fines.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i><span>Fines</span></a></li>
+                    <li class="nav-item"><a href="payments.html" class="nav-link"><i class="fas fa-money-bill-alt"></i><span>Payments</span></a></li>
+                    <li class="nav-item"><a href="transactions.html" class="nav-link"><i class="fas fa-exchange-alt"></i><span>Transactions</span></a></li>
+                    <li class="nav-item"><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li class="nav-item"><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a></li>
                 </ul>
             </nav>
         </aside>
@@ -131,13 +40,15 @@
                 </div>
             </header>
 
-            <section class="transactions-section">
+            <!-- Fines Management Section -->
+            <section class="card">
                 <div class="section-header">
                     <h2>Manage Fines</h2>
-                    <button class="btn primary" id="openFineModalBtn"><i class="fas fa-plus"></i> Issue Fine</button>
+                    <button class="btn primary" id="openFineModalBtn">
+                        <i class="fas fa-plus"></i> Issue Fine
+                    </button>
                 </div>
-
-                <div class="transactions-table">
+                <div class="table-container">
                     <table>
                         <thead>
                             <tr>
@@ -150,36 +61,8 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>2023-11-10</td>
-                                <td>Juan Dela Cruz</td>
-                                <td>Late Attendance</td>
-                                <td>₱100.00</td>
-                                <td>2023-11-20</td>
-                                <td><span class="status-badge pending">Pending</span></td>
-                                <td>
-                                    <button class="btn-icon" title="View">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn-icon primary" title="Mark as Paid">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2023-10-28</td>
-                                <td>Maria Santos</td>
-                                <td>Uniform Violation</td>
-                                <td>₱150.00</td>
-                                <td>2023-11-05</td>
-                                <td><span class="status-badge paid">Paid</span></td>
-                                <td>
-                                    <button class="btn-icon" title="View">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="finesTableBody">
+                            <tr><td colspan="7">Loading fines...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -188,53 +71,48 @@
     </div>
 
     <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </div>
-
-    <!-- Sidebar Toggle (Mobile) -->
-    <div class="sidebar-toggle" id="sidebarToggle">
-        <i class="fas fa-bars"></i>
-    </div>
+    <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
+    <!-- Sidebar Toggle -->
+    <div class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></div>
 
     <!-- Fine Modal -->
     <div class="modal" id="fineModal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('fineModal')">&times;</span>
+            <span class="close-btn" id="closeFineModalBtn">&times;</span>
             <h2>Issue New Fine</h2>
             <form id="fineForm" class="modal-form">
                 <div class="form-group">
                     <label for="student">Student</label>
-                    <select id="student" required>
-                        <option value="">Select Student</option>
+                    <select id="student" name="student_id" required>
+                        <option value="">Select students</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="violation">Violation Type</label>
-                    <select id="violation" required>
-                        <option value="">Select Violation</option>
+                    <select id="violation" name="violation_id" required>
+                        <option value="">Select violations</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="amount">Amount (₱)</label>
-                    <input type="number" id="amount" step="0.01" min="0" required>
+                    <input type="number" id="amount" name="amount" step="0.01" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="dueDate">Due Date</label>
-                    <input type="date" id="dueDate" required>
+                    <input type="date" id="dueDate" name="due_date" required>
                 </div>
                 <div class="form-group">
                     <label for="notes">Notes</label>
-                    <textarea id="notes" rows="3"></textarea>
+                    <textarea id="notes" name="notes" rows="3"></textarea>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn cancel" onclick="closeModal('fineModal')">Cancel</button>
+                    <button type="button" class="btn cancel" id="cancelFineBtn">Cancel</button>
                     <button type="submit" class="btn primary">Issue Fine</button>
                 </div>
             </form>
         </div>
     </div>
+    <script src="../js/app.js"></script>
 
-   <script src="../js/app.js"></script>
 </body>
 </html>
