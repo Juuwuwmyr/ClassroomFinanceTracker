@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,31 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Finance Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar hover-expand" id="sidebar">
+        <aside class="sidebar">
             <div class="logo">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>ClassFinance</span>
             </div>
-           <nav class="main-nav">
+            <nav class="main-nav">
                 <ul>
-                    <li class="active"><a href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li><a href="./views/students.html"><i class="fas fa-users"></i><span> Students</span></a></li>
-                    <li><a href="./views/fines.html"><i class="fas fa-exclamation-triangle"></i><span> Fines</span></a></li>
-                    <li><a href="./views/payments.html"><i class="fas fa-money-bill-alt"></i><span> Payments</span></a></li>
-                    <li><a href="./views/transactions.html"><i class="fas fa-exchange-alt"></i><span> Transactions</span></a></li>
-                    <li><a href="./views/reports.html"><i class="fas fa-chart-bar"></i><span> Reports</span></a></li>
-                    <li><a href="./views/settings.html"><i class="fas fa-cog"></i><span> Settings</span></a></li>
+                    <li class="nav-item active">
+                        <a href="#dashboard" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="views/students.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="views/fines.html" class="nav-link">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Fines</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="views/payments.html" class="nav-link">
+                            <i class="fas fa-money-bill-alt"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="views/transactions.html" class="nav-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="views/reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
-           <main class="main-content">
+      
+        <main class="main-content">
             <header class="top-bar">
                 <h1 class="page-title">Dashboard</h1>
                 <div class="user-profile">
@@ -49,7 +85,9 @@
                         </div>
                         <div class="card-body">
                             <span class="amount">₱12,345.67</span>
-                            <span class="trend positive">+5% from last month</span>
+                            <span class="trend positive">
+                                <i class="fas fa-arrow-up"></i> 5% from last month
+                            </span>
                         </div>
                     </div>
 
@@ -60,7 +98,9 @@
                         </div>
                         <div class="card-body">
                             <span class="amount">₱3,210.50</span>
-                            <span class="trend negative">3 unpaid fines</span>
+                            <span class="trend negative">
+                                <i class="fas fa-arrow-down"></i> 3 unpaid fines
+                            </span>
                         </div>
                     </div>
 
@@ -144,6 +184,20 @@
                                     <td>₱150.00</td>
                                     <td><span class="status-badge pending">Pending</span></td>
                                 </tr>
+                                <tr>
+                                    <td>2023-11-10</td>
+                                    <td>Anna Lopez</td>
+                                    <td>Project Contribution</td>
+                                    <td>₱300.00</td>
+                                    <td><span class="status-badge paid">Paid</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023-11-08</td>
+                                    <td>Carlos Gomez</td>
+                                    <td>Library Fine</td>
+                                    <td>₱75.00</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -152,92 +206,18 @@
         </main>
     </div>
 
-    <!-- Modals -->
-    <div class="modal" id="fineModal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Issue New Fine</h2>
-            <form id="fineForm" class="modal-form">
-                <div class="form-group">
-                    <label for="student">Student</label>
-                    <select id="student" required>
-                        <option value="">Select Student</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="violation">Violation Type</label>
-                    <select id="violation" required>
-                        <option value="">Select Violation</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Amount (₱)</label>
-                    <input type="number" id="amount" step="0.01" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="dueDate">Due Date</label>
-                    <input type="date" id="dueDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Notes</label>
-                    <textarea id="notes" rows="3"></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn primary">Issue Fine</button>
-                </div>
-            </form>
-        </div>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
     </div>
 
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Record Payment</h2>
-            <form id="paymentForm" class="modal-form">
-                <div class="form-group">
-                    <label for="paymentStudent">Student</label>
-                    <select id="paymentStudent">
-                        <option value="">Select Student (optional)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="paymentCategory">Category</label>
-                    <select id="paymentCategory" required>
-                        <option value="">Select Category</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="paymentAmount">Amount (₱)</label>
-                    <input type="number" id="paymentAmount" step="0.01" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="paymentMethod">Payment Method</label>
-                    <select id="paymentMethod" required>
-                        <option value="cash">Cash</option>
-                        <option value="gcash">GCash</option>
-                        <option value="bank">Bank Transfer</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="reference">Reference Number</label>
-                    <input type="text" id="reference">
-                </div>
-                <div class="form-group">
-                    <label for="paymentNotes">Notes</label>
-                    <textarea id="paymentNotes" rows="3"></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn primary">Record Payment</button>
-                </div>
-            </form>
-        </div>
+    <!-- Sidebar Toggle (Mobile) -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
     </div>
-      
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/chart.js"></script>
-    <script src="../js/app.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/chart.js"></script>
 </body>
 </html>
-
