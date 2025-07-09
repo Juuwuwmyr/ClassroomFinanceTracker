@@ -182,14 +182,16 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-// Sidebar Toggle
+//Sidebar Toggle
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const mainContent = document.querySelector('.main-content');
 
 sidebarToggle.addEventListener('click', () => {
     sidebar.classList.toggle('active');
-});
+}); 
+
+
 
 // Collapse sidebar on desktop (optional)
 function handleSidebar() {
@@ -203,6 +205,7 @@ function handleSidebar() {
 
 window.addEventListener('resize', handleSidebar);
 handleSidebar();
+
 
 // Sample Chart Data
 function initCharts() {
