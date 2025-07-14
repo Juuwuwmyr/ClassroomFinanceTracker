@@ -192,6 +192,31 @@ sidebarToggle.addEventListener('click', () => {
 }); 
 
 
+// Get modal and buttons
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("botToggle");
+const closeBtn = document.querySelector(".close");
+
+
+btn.onclick = () => {
+  modal.style.display = "block";
+};
+
+
+closeBtn.onclick = () => {
+  modal.style.display = "none";
+};
+
+
+window.onclick = (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+
+
+
 
 // Collapse sidebar on desktop (optional)
 function handleSidebar() {

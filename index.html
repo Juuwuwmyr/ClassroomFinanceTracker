@@ -29,7 +29,7 @@
             <nav class="main-nav">
                 <ul>
                     <li class="nav-item active">
-                        <a href="#dashboard" class="nav-link">
+                        <a href="/index.html" class="nav-link">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="settings.html" class="nav-link">
+                        <a href="/views/settings.html" class="nav-link">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
@@ -84,6 +84,16 @@
                     <span class="username">Finance Officer</span>
                     <div class="avatar">FO</div>
                 </div>
+
+                    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+     <div class="bot" id="botToggle"> 
+        <i class="fas fa-robot"></i>
+   </div>
+
             </header>
 
             <!-- DASHBOARD SECTION -->
@@ -221,10 +231,14 @@
         </main>
     </div>
 
-    <!-- Theme Toggle Button -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </div>
+    <div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Floating Modal</h2>
+    <p>This is a simple floating modal box.</p>
+  </div>
+</div>
+
 
     <!-- Sidebar Toggle Button (for mobile) -->
     <div class="sidebar-toggle" id="sidebarToggle">
