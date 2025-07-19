@@ -3,14 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initApp();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add 'collapsed' class after a short delay to avoid jump-cut on navigation
-    const sidebar = document.getElementById('sidebar');
-    setTimeout(() => {
-        sidebar.classList.add('collapsed');
-    }, 300); // Adjust delay if needed
-});
-
 
 function initApp() {
     // Initialize all components
@@ -91,7 +83,11 @@ function setupPageNavigation() {
             link.parentElement.classList.add('active');
         }
 
-        link.addEventListener('click', function () {
+        link.addEventListener('click', function (e) {
+            // Add locked class to sidebar to keep it expanded until navigation
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar) sidebar.classList.add('locked');
+            // Proceed with navigation
             window.location.href = href;
         });
     });
@@ -122,7 +118,7 @@ async function submitFineForm(form) {
     const formData = new FormData(form);
 
     try {
-        const res = await fetch('../php/add_fine.php', {
+        const res = await fetch('http://localhost:5118/add-fine', {
             method: 'POST',
             body: formData
         });
@@ -313,23 +309,31 @@ function initCharts() {
 
 document.addEventListener('DOMContentLoaded', initCharts);
 
-
 function populateStudents() {
-    fetch('../php/get_students.php')
+    fetch('http://localhost:5118/get-students')
         .then(res => res.json())
         .then(data => {
             const studentSelect = document.getElementById('student');
+            studentSelect.innerHTML = '<option value="">Select Student</option>';
             data.forEach(student => {
                 const option = document.createElement('option');
                 option.value = student.student_id;
-                option.textContent = student.name;
+                option.textContent = `${student.first_name} ${student.last_name}`;
                 studentSelect.appendChild(option);
             });
+        })
+        .catch(err => {
+            console.error(err);
+            studentSelect.innerHTML = '<option value="">Unable to load students</option>';
+            alert("Error loading students: " + err.message);
         });
 }
 
+
+
+
 function populateViolations() {
-    fetch('../php/get_violations.php')
+    fetch('http://localhost:5118/get-violations')
         .then(res => res.json())
         .then(data => {
             const violationSelect = document.getElementById('violation');
@@ -354,28 +358,28 @@ async function populateSelects() {
     const violationSelect = document.getElementById('violation');
 
     // Load students
-    try {
-        const studentsRes = await fetch('../php/get_students.php');
-        const students = await studentsRes.json();
+   try {
+    const studentsRes = await fetch('http://localhost:5118/get-students');
+    const students = await studentsRes.json();
 
-        if (students.error) throw new Error(students.error);
+    if (students.error) throw new Error(students.error);
 
-        studentSelect.innerHTML = '<option value="">Select Student</option>';
-        students.forEach(student => {
-            const opt = document.createElement('option');
-            opt.value = student.student_id; // ✅ use ID as value
-            opt.textContent = student.name;
-            studentSelect.appendChild(opt);
-        });
-    } catch (err) {
-        console.error(err);
-        studentSelect.innerHTML = '<option value="">Unable to load students</option>';
-        alert("Error loading students: " + err.message);
-    }
+    studentSelect.innerHTML = '<option value="">Select Student</option>';
+    students.forEach(student => {
+        const opt = document.createElement('option');
+        opt.value = student.student_id; // ✅ use ID as value
+        opt.textContent = `${student.first_name} ${student.last_name}`; // ✅ FIXED
+        studentSelect.appendChild(opt);
+    });
+} catch (err) {
+    console.error(err);
+    studentSelect.innerHTML = '<option value="">Unable to load students</option>';
+    alert("Error loading students: " + err.message);
+}
 
     // Load violations
     try {
-        const violationsRes = await fetch('../php/get_violations.php');
+        const violationsRes = await fetch('http://localhost:5118/get-violations');
         const violations = await violationsRes.json();
 
         if (violations.error) throw new Error(violations.error);
@@ -405,7 +409,7 @@ async function loadFines() {
     const tbody = document.getElementById('finesTableBody');
     tbody.innerHTML = '<tr><td colspan="7">Loading fines...</td></tr>';
     try {
-        const res = await fetch('../php/get_fines.php');
+        const res = await fetch('http://localhost:5118/get-fines');
         const fines = await res.json();
 
         if (fines.error) throw new Error(fines.error);

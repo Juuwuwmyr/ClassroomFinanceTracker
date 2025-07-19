@@ -61,6 +61,10 @@ body {
     width: var(--sidebar-width);
 }
 
+.sidebar.locked {
+    width: var(--sidebar-width) !important;
+}
+
 /* Logo */
 .sidebar .logo {
     display: flex;
