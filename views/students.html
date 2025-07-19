@@ -98,32 +98,7 @@
                     </thead>
                     <tbody id="student">
                         <tr>
-                            <td>STU001</td>
-                            <td>Juan Dela Cruz</td>
-                            <td>10</td>
-                            <td>Rizal</td>
-                            <td>
-                                <button class="btn-icon" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn-icon danger" title="Delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>STU002</td>
-                            <td>Maria Santos</td>
-                            <td>9</td>
-                            <td>Luna</td>
-                            <td>
-                                <button class="btn-icon" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn-icon danger" title="Delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
+                            <td colspan="5">Loading students...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -139,5 +114,18 @@
 </div>
 
 <script src="../js/app.js"></script>
+<script>
+    // Ensure students table loads when page is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit for the main app to initialize, then load students
+        setTimeout(() => {
+            if (typeof loadStudentsTable === 'function') {
+                loadStudentsTable();
+            } else {
+                console.error('loadStudentsTable function not found');
+            }
+        }, 1000);
+    });
+</script>
 </body>
 </html>

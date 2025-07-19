@@ -50,9 +50,14 @@ function initForms() {
 
 function loadData() {
     setTimeout(() => {
-        populateViolations() ;
+        populateViolations();
         populateStudents();
         populatePaymentCategories();
+        
+        // Load students table if on students page
+        if (window.location.pathname.includes('students.html')) {
+            loadStudentsTable();
+        }
     }, 500);
 }
 
@@ -314,22 +319,79 @@ function populateStudents() {
         .then(res => res.json())
         .then(data => {
             const studentSelect = document.getElementById('student');
-            studentSelect.innerHTML = '<option value="">Select Student</option>';
-            data.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student.student_id;
-                option.textContent = `${student.first_name} ${student.last_name}`;
-                studentSelect.appendChild(option);
-            });
+            if (studentSelect && studentSelect.tagName === 'SELECT') {
+                studentSelect.innerHTML = '<option value="">Select Student</option>';
+                data.forEach(student => {
+                    const option = document.createElement('option');
+                    option.value = student.student_id;
+                    option.textContent = `${student.first_name} ${student.last_name}`;
+                    studentSelect.appendChild(option);
+                });
+            }
         })
         .catch(err => {
             console.error(err);
-            studentSelect.innerHTML = '<option value="">Unable to load students</option>';
+            const studentSelect = document.getElementById('student');
+            if (studentSelect && studentSelect.tagName === 'SELECT') {
+                studentSelect.innerHTML = '<option value="">Unable to load students</option>';
+            }
             alert("Error loading students: " + err.message);
         });
 }
 
+// Load Students Table
+async function loadStudentsTable() {
+    const tbody = document.getElementById('student');
+    if (!tbody) {
+        console.error('Student table body not found');
+        return;
+    }
+    
+    console.log('Loading students table...');
+    tbody.innerHTML = '<tr><td colspan="5">Loading students...</td></tr>';
+    
+    try {
+        console.log('Fetching students from API...');
+        const res = await fetch('http://localhost:5118/get-students');
+        
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        const students = await res.json();
+        console.log('Students data received:', students);
 
+        if (students.error) throw new Error(students.error);
+
+        tbody.innerHTML = '';
+        if (students.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5">No students found.</td></tr>';
+        } else {
+            students.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${student.student_id || 'N/A'}</td>
+                    <td>${(student.first_name || '')} ${(student.last_name || '')}</td>
+                    <td>${student.grade_level || 'N/A'}</td>
+                    <td>${student.section || 'N/A'}</td>
+                    <td>
+                        <button class="btn-icon" title="Edit" onclick="editStudent('${student.student_id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-icon danger" title="Delete" onclick="deleteStudent('${student.student_id}')">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    } catch (err) {
+        console.error('Error loading students:', err);
+        tbody.innerHTML = '<tr><td colspan="5">Error loading students. Check console for details.</td></tr>';
+        alert("Error loading students: " + err.message);
+    }
+}
 
 
 function populateViolations() {
@@ -403,6 +465,21 @@ document.getElementById('openFineModalBtn').addEventListener('click', () => fine
 document.getElementById('closeFineModalBtn').addEventListener('click', () => fineModal.style.display = 'none');
 document.getElementById('cancelFineBtn').addEventListener('click', () => fineModal.style.display = 'none');
 
+
+// Student management functions
+function editStudent(studentId) {
+    alert(`Edit student with ID: ${studentId}`);
+    // TODO: Implement edit student modal/form
+}
+
+function deleteStudent(studentId) {
+    if (confirm(`Are you sure you want to delete student with ID: ${studentId}?`)) {
+        alert(`Delete student with ID: ${studentId}`);
+        // TODO: Implement delete student API call
+        // After successful deletion, reload the table
+        loadStudentsTable();
+    }
+}
 
 // Load Fines Table
 async function loadFines() {
